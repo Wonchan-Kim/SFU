@@ -1,0 +1,9 @@
+Q1. 
+do_something function calculates the sum of series of integers, increasing by 2 every time it enters the loop, starting from 1. The loop continues until the sum stored in %rbx is greater than or equal to the value stored in %rdi. Then %rax stores the total sum that %rbx had, and returns the total sum. 
+
+Q2.
+In f.S, the registers that are not to be preserved are initialized to 0 every time the function f is called. Therefore, I had to use call-preserved registers for first three times we call function f, 
+a = x + 3 (stores in %r12)
+b = f(x, a) (stores in %r13)
+c = f(b, x) (stores in %r14)
+However, for storing d, since no further calls of f are made, I used non preserved register (%r9). This ensures that f does not overwrite the value stored in the register to 0, therefore enables the code to correctly return the result of a + b + c + d.

@@ -1,0 +1,17 @@
+Q1.
+To assemble, as --warn array_sum.S -o array_sum.o
+To compile, gcc -Wall -Wpedantic -std=c17 -march=haswell -c array_sum_speed.c -o array_sum_speed.o
+To link, gcc array_sum.o array_sum_speed.o -o a.out
+To run, ./a.out 1000000
+
+Q2. 
+The first command I used to compile array_sum.c file is:
+    gcc -Wall -Wpedantic -std=c17 -march=haswell -c array_sum.c -o array_sum.o
+
+
+C implementation was approximately 2ms slower than the provided assembly.
+My C implementation ranged from 2.78-3.05 ms, while assembly code was faster, ranged from 0.38-0.60 ms with approximately 0.42ms on average.
+
+Q3.
+After adding the -O3 switch, the speed of the C implementation significantly improved and got approximately 2.5 times faster than that of the assembly provided. 
+Considering average time on C implementation without -O3 switch recorded approximately 2.81ms. C implementation after adding -O3 switch to the command drastically reduced to average speed of approximately 0.18ms, ranged from 0.15-0.36ms. 
