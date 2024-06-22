@@ -8,22 +8,22 @@ void decode_utf8(const char* s) {
         int bytes = 0;
         unsigned int decoder = 0;
 
-        if(*s1 <= 0xBF){
+        if((*s1 & 0x80) == 0x00){
             decoder = *s1;
             bytes = 1;
         }
-        else if((*s1 & 0XE0) == 0XC0){
-            decoder = (*s1 & 0X1F) << 6; //extract first byte, shift for second byte
-            decoder |= (*(s1 + 1) & 0X3F); //add second byte
+        else if((*s1 & 0xE0) == 0xC0){
+            decoder = (*s1 & 0x1F) << 6; //extract first byte, shift for second byte
+            decoder |= (*(s1 + 1) & 0x3F); //add second byte
             bytes = 2;
         }
-        else if((*s1 & 0xF0) == 0XE0){
-            decoder = (*s1 & 0X0F) << 12; //extract first byte, shift for second byte
-            decoder |= (*(s1 + 1) & 0X3F) << 6; //add second byte
-            decoder |= (*(s1 + 1) & 0X3F); //add third byte
+        else if((*s1 & 0xF0) == 0xE0){
+            decoder = (*s1 & 0x0F) << 12; //extract first byte, shift for second byte
+            decoder |= (*(s1 + 1) & 0x3F) << 6; //add second byte
+            decoder |= (*(s1 + 2) & 0x3F); //add third byte
             bytes = 3;
         }
-        else if ((*s & 0xF8) == 0xF0) {
+        else if ((*s1 & 0xF8) == 0xF0) {
             decoder = (*s1 & 0x07) << 18;
             decoder |= (*(s1 + 1) & 0x3F) << 12;
             decoder |= (*(s1 + 2) & 0x3F) << 6;
